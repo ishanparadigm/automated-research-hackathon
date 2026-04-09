@@ -39,6 +39,18 @@ Everything useful for building an automated research agent — APIs, MCP servers
 - **Optional:** Zotero integration, OpenReview
 - **Key insight:** Uses 5+ paper metadata APIs together for comprehensive coverage
 
+### Nous Research Hermes Agent (self-improving)
+- **What:** General-purpose AI agent with a closed learning loop — automatically creates, refines, and persists reusable skills from tasks
+- **Repo:** [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) (MIT, Python)
+- **Self-improving skills:** Auto-generates skills from complex tasks, refines them during execution, persists as procedural memory (compatible with [agentskills.io](https://agentskills.io) open standard)
+- **Memory:** Agent-curated persistent memory + full-text search across session history with LLM-powered summarization for cross-session recall
+- **Models:** Model-agnostic — Nous Portal, OpenRouter (200+ models), OpenAI, Anthropic, custom endpoints. Swap with one command.
+- **Execution:** 6 backends (local, Docker, SSH, Daytona, Singularity, Modal). Spawns isolated parallel subagents for concurrent workstreams.
+- **Scheduling:** Built-in cron for unattended automated tasks
+- **RL/training:** Batch trajectory generation, Atropos RL environments, trajectory compression for training tool-calling models
+- **Messaging:** Telegram, Discord, Slack, WhatsApp, Signal via unified gateway
+- **Key insight:** Karpathy's autoresearch pattern generalized — the self-improving skill loop means the agent gets better at research the more it does
+
 ---
 
 ## Research APIs

@@ -86,6 +86,17 @@ Everything useful for building an automated research agent — APIs, MCP servers
 - **Docs:** [docs.cdp.coinbase.com/x402](https://docs.cdp.coinbase.com/x402/welcome)
 - **MCP integration:** [Zuplo x402 + MCP](https://zuplo.com/blog/mcp-api-payments-with-x402) — enables MCP servers to charge via stablecoin micropayments
 
+### MPP — Machine Payments Protocol (Tempo + Stripe)
+- **What:** Open standard for machine-to-machine payments via HTTP 402. Co-developed by Tempo and Stripe.
+- **How:** Server issues a challenge (WWW-Authenticate header with price) → client submits a credential (Authorization header with proof of payment) → server returns a receipt (Payment-Receipt header). Works over both REST (HTTP headers) and JSON-RPC (MCP tool calls).
+- **Payment methods:** Tempo stablecoins, **Stripe** (cards + wallets), Lightning Network, Solana (SOL + SPL), Monad (ERC-20), Stellar (SEP-41). Both one-time and session-based (pay-as-you-go).
+- **SDKs:** TypeScript (`mppx`), Python (`pympp`), Rust (`mpp`). Middleware for Express, Next.js, Hono, Elysia. CLI tool included.
+- **MCP native:** Supports JSON-RPC transport for MCP tool calls — agents can pay for MCP tools inline
+- **Agentic features:** Agents pay for APIs autonomously with no signup/API keys. Feed `llms-full.txt` to give your agent full MPP context. Supports micropayments with stablecoin settlement, no minimum tx size.
+- **Advanced:** Discovery via OpenAPI, split payments, refunds, session deposits, identity/access control without payment
+- **x402 compatible:** Provides migration path from x402 to MPP (adds multi-method payments, sessions, IETF standardization)
+- **Site:** [mpp.dev](https://mpp.dev/)
+
 ### AP2 — Agent Payments Protocol (Google)
 - **What:** Open protocol for agent-to-merchant transactions using Verifiable Digital Credentials
 - **Payment-agnostic:** Credit/debit, bank transfers, wallets, AND stablecoins (via x402)
@@ -93,7 +104,7 @@ Everything useful for building an automated research agent — APIs, MCP servers
 - **GitHub:** [google-agentic-commerce/AP2](https://github.com/google-agentic-commerce/AP2)
 
 ### Hackathon angle
-x402 is the most buildable — the SDK is ready, it works with USDC on Base/Solana, and there's already an MCP integration. An auto-research agent that pays for premium API access or paywalled papers via x402 micropayments would be a compelling demo.
+**MPP is the strongest pick** — it's the most complete (multi-chain, multi-method including Stripe, native MCP support, Python SDK ready). An auto-research agent that pays for premium API access or paywalled papers via MPP micropayments would be a compelling demo. x402 is simpler if you only need USDC on Base/Solana.
 
 ---
 
@@ -116,5 +127,5 @@ aider-chat, wandb, transformers, datasets, langchain
 
 ### Tier 4: Payments & advanced integrations
 ```
-x402 SDK, MCP server (PaperMCP), tantivy
+pympp (MPP), x402 SDK, MCP server (PaperMCP), tantivy
 ```
